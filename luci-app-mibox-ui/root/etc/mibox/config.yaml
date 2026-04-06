@@ -1,0 +1,27 @@
+log-level: warning
+allow-lan: true
+mode: rule
+external-controller: 0.0.0.0:9090
+secret: ""
+ipv6: true
+
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+
+proxies:
+  - name: DIRECT
+    type: direct
+
+proxy-groups:
+  - name: Main
+    type: select
+    proxies:
+      - DIRECT
+
+rules:
+  - MATCH,Main

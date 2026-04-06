@@ -1,0 +1,477 @@
+﻿msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"PO-Revision-Date: 2026-04-07 00:00+0000\n"
+"Last-Translator: Ang3el\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Running"
+msgstr "РЎРµСЂРІРёСЃ Р·Р°РїСѓС‰РµРЅ"
+
+msgid "Stopped"
+msgstr "РЎРµСЂРІРёСЃ РѕСЃС‚Р°РЅРѕРІР»РµРЅ"
+
+msgid "No selector data. Start Mihomo and open external-controller API."
+msgstr "РќРµС‚ РґР°РЅРЅС‹С… СЃРµР»РµРєС‚РѕСЂРѕРІ. Р—Р°РїСѓСЃС‚РёС‚Рµ Mihomo Рё РІРєР»СЋС‡РёС‚Рµ external-controller API."
+
+msgid "No active connections."
+msgstr "РќРµС‚ Р°РєС‚РёРІРЅС‹С… СЃРѕРµРґРёРЅРµРЅРёР№."
+
+msgid "Chain"
+msgstr "Р¦РµРїРѕС‡РєР°"
+
+msgid "Host"
+msgstr "РҐРѕСЃС‚"
+
+msgid "Source"
+msgstr "РСЃС‚РѕС‡РЅРёРє"
+
+msgid "Traffic"
+msgstr "РўСЂР°С„РёРє"
+
+msgid "Time"
+msgstr "Р’СЂРµРјСЏ"
+
+msgid "No logs yet."
+msgstr "Р›РѕРіРё РїРѕРєР° РїСѓСЃС‚С‹."
+
+msgid "Working..."
+msgstr "Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ..."
+
+msgid "Restart"
+msgstr "РџРµСЂРµР·Р°РїСѓСЃРє"
+
+msgid "Routing mode"
+msgstr "Р РµР¶РёРј РјР°СЂС€СЂСѓС‚РёР·Р°С†РёРё"
+
+msgid "Refresh"
+msgstr "РћР±РЅРѕРІРёС‚СЊ"
+
+msgid "Configuration"
+msgstr "РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ"
+
+msgid "Selectors"
+msgstr "РЎРµР»РµРєС‚РѕСЂС‹"
+
+msgid "Connections"
+msgstr "РЎРѕРµРґРёРЅРµРЅРёСЏ"
+
+msgid "Config path:"
+msgstr "РџСѓС‚СЊ РєРѕРЅС„РёРіР°:"
+
+msgid "Validate"
+msgstr "РџСЂРѕРІРµСЂРёС‚СЊ"
+
+msgid "Save"
+msgstr "РЎРѕС…СЂР°РЅРёС‚СЊ"
+
+msgid "Save & Apply"
+msgstr "РЎРѕС…СЂР°РЅРёС‚СЊ Рё РїСЂРёРјРµРЅРёС‚СЊ"
+
+msgid "Proxy selector groups from Mihomo API"
+msgstr "Р“СЂСѓРїРїС‹ СЃРµР»РµРєС‚РѕСЂРѕРІ РїСЂРѕРєСЃРё РёР· Mihomo API"
+
+msgid "Refresh selectors"
+msgstr "РћР±РЅРѕРІРёС‚СЊ СЃРµР»РµРєС‚РѕСЂС‹"
+
+msgid "Live connections"
+msgstr "РђРєС‚РёРІРЅС‹Рµ СЃРѕРµРґРёРЅРµРЅРёСЏ"
+
+msgid "Refresh connections"
+msgstr "РћР±РЅРѕРІРёС‚СЊ СЃРѕРµРґРёРЅРµРЅРёСЏ"
+
+msgid "Logs"
+msgstr "Р–СѓСЂРЅР°Р»"
+
+msgid "Filter logs"
+msgstr "Р¤РёР»СЊС‚СЂ Р»РѕРіРѕРІ"
+
+msgid "Refresh logs"
+msgstr "РћР±РЅРѕРІРёС‚СЊ Р»РѕРіРё"
+
+msgid "Start"
+msgstr "Р—Р°РїСѓСЃРє"
+
+msgid "Stop"
+msgstr "РЎС‚РѕРї"
+
+msgid "Service started"
+msgstr "РЎРµСЂРІРёСЃ Р·Р°РїСѓС‰РµРЅ"
+
+msgid "Service stopped"
+msgstr "РЎРµСЂРІРёСЃ РѕСЃС‚Р°РЅРѕРІР»РµРЅ"
+
+msgid "Service restarted"
+msgstr "РЎРµСЂРІРёСЃ РїРµСЂРµР·Р°РїСѓС‰РµРЅ"
+
+msgid "Routing mode changed: %s"
+msgstr "Р РµР¶РёРј РјР°СЂС€СЂСѓС‚РёР·Р°С†РёРё РёР·РјРµРЅРµРЅ: %s"
+
+msgid "Configuration saved"
+msgstr "РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ СЃРѕС…СЂР°РЅРµРЅР°"
+
+msgid "Configuration is valid"
+msgstr "РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ РІР°Р»РёРґРЅР°"
+
+msgid "Validation failed"
+msgstr "РџСЂРѕРІРµСЂРєР° РЅРµ РїСЂРѕР№РґРµРЅР°"
+
+msgid "Validation error: %s"
+msgstr "РћС€РёР±РєР° РїСЂРѕРІРµСЂРєРё: %s"
+
+msgid "Configuration applied and service restarted"
+msgstr "РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ РїСЂРёРјРµРЅРµРЅР°, СЃРµСЂРІРёСЃ РїРµСЂРµР·Р°РїСѓС‰РµРЅ"
+
+msgid "Dashboard"
+msgstr "РџР°РЅРµР»СЊ"
+
+msgid "Settings"
+msgstr "РќР°СЃС‚СЂРѕР№РєРё"
+
+msgid "Interface Processing Mode"
+msgstr "Р РµР¶РёРј РѕР±СЂР°Р±РѕС‚РєРё РёРЅС‚РµСЂС„РµР№СЃРѕРІ"
+
+msgid "Choose how to handle network interfaces for proxy processing."
+msgstr "Р’С‹Р±РµСЂРёС‚Рµ, РєР°Рє РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ СЃРµС‚РµРІС‹Рµ РёРЅС‚РµСЂС„РµР№СЃС‹ РґР»СЏ РїСЂРѕРєСЃРёСЂРѕРІР°РЅРёСЏ."
+
+msgid "Exclude Mode (Universal approach)"
+msgstr "Р РµР¶РёРј РёСЃРєР»СЋС‡РµРЅРёСЏ (СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Р№)"
+
+msgid "Process traffic from ALL interfaces except selected ones. Automatically detects and excludes WAN. Recommended for most users."
+msgstr "РћР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ С‚СЂР°С„РёРє СЃРѕ РІСЃРµС… РёРЅС‚РµСЂС„РµР№СЃРѕРІ, РєСЂРѕРјРµ РІС‹Р±СЂР°РЅРЅС‹С…. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РѕР±РЅР°СЂСѓР¶РёРІР°РµС‚ Рё РёСЃРєР»СЋС‡Р°РµС‚ WAN. Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РґР»СЏ Р±РѕР»СЊС€РёРЅСЃС‚РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№."
+
+msgid "Explicit Mode (Precise control)"
+msgstr "РЇРІРЅС‹Р№ СЂРµР¶РёРј (С‚РѕС‡РЅС‹Р№ РєРѕРЅС‚СЂРѕР»СЊ)"
+
+msgid "Process traffic ONLY from selected interfaces. More secure but requires manual configuration. Recommended for advanced users."
+msgstr "РћР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ С‚СЂР°С„РёРє С‚РѕР»СЊРєРѕ СЃ РІС‹Р±СЂР°РЅРЅС‹С… РёРЅС‚РµСЂС„РµР№СЃРѕРІ. Р‘РѕР»РµРµ Р±РµР·РѕРїР°СЃРЅРѕ, РЅРѕ С‚СЂРµР±СѓРµС‚ СЂСѓС‡РЅРѕР№ РЅР°СЃС‚СЂРѕР№РєРё. Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РґР»СЏ РѕРїС‹С‚РЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№."
+
+msgid "Proxy Mode"
+msgstr "Р РµР¶РёРј РїСЂРѕРєСЃРёСЂРѕРІР°РЅРёСЏ"
+
+msgid "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN вЂ” best for gaming)."
+msgstr "Р’С‹Р±РµСЂРёС‚Рµ, РєР°Рє РїРµСЂРµРЅР°РїСЂР°РІР»СЏС‚СЊ С‚СЂР°С„РёРє РІ Clash: TPROXY (РІРµСЃСЊ С‚СЂР°С„РёРє), TUN (РІРµСЃСЊ С‚СЂР°С„РёРє С‡РµСЂРµР· РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ) РёР»Рё MIXED (TCP С‡РµСЂРµР· TPROXY, UDP С‡РµСЂРµР· TUN вЂ” РѕРїС‚РёРјР°Р»СЊРЅРѕ РґР»СЏ РёРіСЂ)."
+
+msgid "TUN stack"
+msgstr "TUN stack"
+
+msgid "Automatic Interface Detection"
+msgstr "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕРїСЂРµРґРµР»РµРЅРёРµ РёРЅС‚РµСЂС„РµР№СЃРѕРІ"
+
+msgid "Automatically detect WAN interface"
+msgstr "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РѕРїСЂРµРґРµР»СЏС‚СЊ WAN-РёРЅС‚РµСЂС„РµР№СЃ"
+
+msgid "When enabled, automatically detects and excludes WAN interface. Disable for manual interface exclusions."
+msgstr "Р•СЃР»Рё РІРєР»СЋС‡РµРЅРѕ, Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РѕР±РЅР°СЂСѓР¶РёРІР°РµС‚ Рё РёСЃРєР»СЋС‡Р°РµС‚ WAN-РёРЅС‚РµСЂС„РµР№СЃ. РћС‚РєР»СЋС‡РёС‚Рµ РґР»СЏ СЂСѓС‡РЅРѕРіРѕ РІС‹Р±РѕСЂР° РёРЅС‚РµСЂС„РµР№СЃРѕРІ РґР»СЏ РёСЃРєР»СЋС‡РµРЅРёСЏ."
+
+msgid "Select interfaces to process"
+msgstr "Р’С‹Р±РµСЂРёС‚Рµ РёРЅС‚РµСЂС„РµР№СЃС‹ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё"
+
+msgid "Select interfaces to exclude"
+msgstr "Р’С‹Р±РµСЂРёС‚Рµ РёРЅС‚РµСЂС„РµР№СЃС‹ РґР»СЏ РёСЃРєР»СЋС‡РµРЅРёСЏ"
+
+msgid "Traffic from these interfaces will be processed by the proxy."
+msgstr "РўСЂР°С„РёРє СЃ СЌС‚РёС… РёРЅС‚РµСЂС„РµР№СЃРѕРІ Р±СѓРґРµС‚ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊСЃСЏ С‡РµСЂРµР· РїСЂРѕРєСЃРё."
+
+msgid "Traffic from these interfaces will bypass the proxy (direct routing)."
+msgstr "РўСЂР°С„РёРє СЃ СЌС‚РёС… РёРЅС‚РµСЂС„РµР№СЃРѕРІ Р±СѓРґРµС‚ РёРґС‚Рё РІ РѕР±С…РѕРґ РїСЂРѕРєСЃРё (РїСЂСЏРјР°СЏ РјР°СЂС€СЂСѓС‚РёР·Р°С†РёСЏ)."
+
+msgid "Additional Settings"
+msgstr "Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё"
+
+msgid "Block QUIC traffic (UDP port 443)"
+msgstr "Р‘Р»РѕРєРёСЂРѕРІР°С‚СЊ С‚СЂР°С„РёРє QUIC (UDP-РїРѕСЂС‚ 443)"
+
+msgid "When enabled, blocks QUIC traffic on UDP port 443. This can improve proxy effectiveness for services like YouTube."
+msgstr "Р•СЃР»Рё РІРєР»СЋС‡РµРЅРѕ, Р±Р»РѕРєРёСЂСѓРµС‚ С‚СЂР°С„РёРє QUIC РїРѕ РїРѕСЂС‚Сѓ 443 (UDP). Р­С‚Рѕ РјРѕР¶РµС‚ СѓР»СѓС‡С€РёС‚СЊ СЌС„С„РµРєС‚РёРІРЅРѕСЃС‚СЊ РїСЂРѕРєСЃРё РґР»СЏ СЃРµСЂРІРёСЃРѕРІ РІСЂРѕРґРµ YouTube."
+
+msgid "Store rules and proxy providers in RAM (tmpfs)"
+msgstr "РҐСЂР°РЅРёС‚СЊ РїСЂР°РІРёР»Р° Рё proxy-providers РІ RAM (tmpfs)"
+
+msgid "When enabled, rulesets and proxy-providers are stored in tmpfs for faster access (uses RAM)."
+msgstr "Р•СЃР»Рё РІРєР»СЋС‡РµРЅРѕ, РєР°С‚Р°Р»РѕРіРё rulesets Рё proxy-providers СЂР°Р·РјРµС‰Р°СЋС‚СЃСЏ РІ tmpfs РґР»СЏ Р±РѕР»РµРµ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ RAM)."
+
+msgid "Add HWID headers to subscriptions"
+msgstr "Р”РѕР±Р°РІРёС‚СЊ HWID-Р·Р°РіРѕР»РѕРІРєРё Рє РїРѕРґРїРёСЃРєР°Рј"
+
+msgid "Automatically adds HWID headers to proxy-providers for device tracking (Remnawave compatibility)."
+msgstr "РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РґРѕР±Р°РІР»СЏРµС‚ HWID-Р·Р°РіРѕР»РѕРІРєРё Рє proxy-providers РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ СѓСЃС‚СЂРѕР№СЃС‚РІР° (СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ СЃ Remnawave)."
+
+msgid "Save settings"
+msgstr "РЎРѕС…СЂР°РЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё"
+
+msgid "Clear selection"
+msgstr "РћС‡РёСЃС‚РёС‚СЊ РІС‹Р±РѕСЂ"
+
+msgid "Restart service"
+msgstr "РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚СЊ СЃР»СѓР¶Р±Сѓ"
+
+msgid "Restart Clash service after saving changes"
+msgstr "РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ СЃР»СѓР¶Р±Сѓ Clash РїРѕСЃР»Рµ СЃРѕС…СЂР°РЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№"
+
+msgid "Mihomo Kernel Management"
+msgstr "РЈРїСЂР°РІР»РµРЅРёРµ СЏРґСЂРѕРј Mihomo"
+
+msgid "Download and manage the Mihomo (Clash Meta) kernel binary."
+msgstr "Р—Р°РіСЂСѓР·РєР° Рё СѓРїСЂР°РІР»РµРЅРёРµ РёСЃРїРѕР»РЅСЏРµРјС‹Рј С„Р°Р№Р»РѕРј СЏРґСЂР° Mihomo (Clash Meta)."
+
+msgid "Reinstall kernel"
+msgstr "РџРµСЂРµСѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЏРґСЂРѕ"
+
+msgid "Refresh status"
+msgstr "РћР±РЅРѕРІРёС‚СЊ СЃС‚Р°С‚СѓСЃ"
+
+msgid "Kernel status: Installed"
+msgstr "РЎС‚Р°С‚СѓСЃ СЏРґСЂР°: РЈСЃС‚Р°РЅРѕРІР»РµРЅРѕ"
+
+msgid "Kernel status: Not installed"
+msgstr "РЎС‚Р°С‚СѓСЃ СЏРґСЂР°: РќРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ"
+
+msgid "Version: %s"
+msgstr "Р’РµСЂСЃРёСЏ: %s"
+
+msgid "System architecture: %s"
+msgstr "РђСЂС…РёС‚РµРєС‚СѓСЂР° СЃРёСЃС‚РµРјС‹: %s"
+
+msgid "Latest available: %s"
+msgstr "РџРѕСЃР»РµРґРЅСЏСЏ РґРѕСЃС‚СѓРїРЅР°СЏ: %s"
+
+msgid "Failed to check latest version"
+msgstr "РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕРІРµСЂРёС‚СЊ РїРѕСЃР»РµРґРЅСЋСЋ РІРµСЂСЃРёСЋ"
+
+msgid "No binary found for architecture: %s"
+msgstr "РќРµ РЅР°Р№РґРµРЅ Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» РґР»СЏ Р°СЂС…РёС‚РµРєС‚СѓСЂС‹: %s"
+
+msgid "Mihomo kernel downloaded and installed successfully!"
+msgstr "РЇРґСЂРѕ Mihomo СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅРѕ Рё СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ!"
+
+msgid "Failed to download mihomo kernel: %s"
+msgstr "РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ СЏРґСЂРѕ mihomo: %s"
+
+msgid "Settings saved. Please restart the Clash service for changes to take effect."
+msgstr "РќР°СЃС‚СЂРѕР№РєРё СЃРѕС…СЂР°РЅРµРЅС‹. РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ СЃР»СѓР¶Р±Сѓ Clash, С‡С‚РѕР±С‹ РёР·РјРµРЅРµРЅРёСЏ РІСЃС‚СѓРїРёР»Рё РІ СЃРёР»Сѓ."
+
+msgid "TUN: TUN interface mode. Creates virtual network interface for all traffic. Better performance and works without TPROXY."
+msgstr "TUN: СЂРµР¶РёРј С‡РµСЂРµР· РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ. РќР°РїСЂР°РІР»СЏРµС‚ РІРµСЃСЊ С‚СЂР°С„РёРє С‡РµСЂРµР· TUN, РѕР±С‹С‡РЅРѕ Р»СѓС‡С€Рµ РїРѕ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё Рё СЂР°Р±РѕС‚Р°РµС‚ Р±РµР· TPROXY."
+
+msgid "MIXED: Hybrid mode. TCP via TPROXY and UDP via TUN. Usually optimal for gaming and low-latency UDP."
+msgstr "MIXED: РіРёР±СЂРёРґРЅС‹Р№ СЂРµР¶РёРј. TCP С‡РµСЂРµР· TPROXY, UDP С‡РµСЂРµР· TUN. РћР±С‹С‡РЅРѕ РѕРїС‚РёРјР°Р»РµРЅ РґР»СЏ РёРіСЂ Рё РЅРёР·РєРѕР№ Р·Р°РґРµСЂР¶РєРё UDP."
+
+msgid "TPROXY: Transparent proxy mode. Routes TCP and UDP through TPROXY port 7894."
+msgstr "TPROXY: РїСЂРѕР·СЂР°С‡РЅС‹Р№ СЂРµР¶РёРј РїСЂРѕРєСЃРё. РќР°РїСЂР°РІР»СЏРµС‚ TCP Рё UDP С‡РµСЂРµР· TPROXY-РїРѕСЂС‚ 7894."
+
+msgid "Mode: Explicit (process only selected)"
+msgstr "Р РµР¶РёРј: РЇРІРЅС‹Р№ (РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ С‚РѕР»СЊРєРѕ РІС‹Р±СЂР°РЅРЅС‹Рµ)"
+
+msgid "Manual selection: %s"
+msgstr "Р СѓС‡РЅРѕР№ РІС‹Р±РѕСЂ: %s"
+
+msgid "No interfaces configured"
+msgstr "РРЅС‚РµСЂС„РµР№СЃС‹ РЅРµ РЅР°СЃС‚СЂРѕРµРЅС‹"
+
+msgid "Explicit mode enabled (manual control)"
+msgstr "Р’РєР»СЋС‡РµРЅ СЏРІРЅС‹Р№ СЂРµР¶РёРј (СЂСѓС‡РЅРѕРµ СѓРїСЂР°РІР»РµРЅРёРµ)"
+
+msgid "Mode: Exclude (process all except selected)"
+msgstr "Р РµР¶РёРј: РСЃРєР»СЋС‡РµРЅРёСЏ (РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РІСЃРµ, РєСЂРѕРјРµ РІС‹Р±СЂР°РЅРЅС‹С…)"
+
+msgid "Auto-detected WAN: %s вњ“"
+msgstr "РђРІС‚Рѕ-РѕРїСЂРµРґРµР»РµРЅРёРµ WAN: %s вњ“"
+
+msgid "Manual exclusions: %s"
+msgstr "Р СѓС‡РЅС‹Рµ РёСЃРєР»СЋС‡РµРЅРёСЏ: %s"
+
+msgid "No exclusions configured"
+msgstr "РСЃРєР»СЋС‡РµРЅРёСЏ РЅРµ РЅР°СЃС‚СЂРѕРµРЅС‹"
+
+msgid "Available WAN interface: %s"
+msgstr "Р”РѕСЃС‚СѓРїРЅС‹Р№ WAN-РёРЅС‚РµСЂС„РµР№СЃ: %s"
+
+msgid "No WAN interface detected"
+msgstr "WAN-РёРЅС‚РµСЂС„РµР№СЃ РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅ"
+
+msgid "Download failed"
+msgstr "РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё"
+
+msgid "Extraction failed"
+msgstr "РћС€РёР±РєР° СЂР°СЃРїР°РєРѕРІРєРё"
+
+msgid "Install failed"
+msgstr "РћС€РёР±РєР° СѓСЃС‚Р°РЅРѕРІРєРё"
+
+msgid "WAN Interfaces"
+msgstr "WAN-РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "Ethernet Interfaces"
+msgstr "Ethernet-РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "Wi-Fi interfaces"
+msgstr "Wi-Fi РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "USB Interfaces"
+msgstr "USB-РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "VPN Interfaces"
+msgstr "VPN-РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "Virtual Interfaces"
+msgstr "Р’РёСЂС‚СѓР°Р»СЊРЅС‹Рµ РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "Other Interfaces"
+msgstr "РџСЂРѕС‡РёРµ РёРЅС‚РµСЂС„РµР№СЃС‹"
+
+msgid "Rule sets"
+msgstr "РќР°Р±РѕСЂС‹ РїСЂР°РІРёР»"
+
+msgid "Proxy sets"
+msgstr "РќР°Р±РѕСЂС‹ РїСЂРѕРєСЃРё"
+
+msgid "Providers refreshed (updated: %s, failed: %s)"
+msgstr "РџСЂРѕРІР°Р№РґРµСЂС‹ РѕР±РЅРѕРІР»РµРЅС‹ (СѓСЃРїРµС€РЅРѕ: %s, СЃ РѕС€РёР±РєРѕР№: %s)"
+
+msgid "Providers refresh failed: %s"
+msgstr "РќРµ СѓРґР°Р»РѕСЃСЊ РѕР±РЅРѕРІРёС‚СЊ РїСЂРѕРІР°Р№РґРµСЂС‹: %s"
+
+msgid "Failed to apply runtime settings: %s"
+msgstr "РќРµ СѓРґР°Р»РѕСЃСЊ РїСЂРёРјРµРЅРёС‚СЊ runtime-РЅР°СЃС‚СЂРѕР№РєРё: %s"
+
+msgid "Runtime settings applied"
+msgstr "Runtime-РЅР°СЃС‚СЂРѕР№РєРё РїСЂРёРјРµРЅРµРЅС‹"
+
+msgid "Subscription URL"
+msgstr "Ссылка подписки"
+
+msgid "Update from subscription"
+msgstr "Обновить из подписки"
+
+msgid "Remove subscription"
+msgstr "Удалить подписку"
+
+msgid "Subscription action failed"
+msgstr "Ошибка действия подписки"
+
+msgid "Auto: %s"
+msgstr "Авто: %s"
+
+msgid "Subscription configured. Last mode: %s"
+msgstr "Подписка настроена. Режим: %s"
+
+msgid "Subscription is not configured."
+msgstr "Подписка не настроена."
+
+msgid "Please enter a valid http(s) subscription URL."
+msgstr "Введите корректную ссылку подписки http(s)."
+
+msgid "Failed to update subscription schedule: %s"
+msgstr "Не удалось обновить расписание подписки: %s"
+
+msgid "Subscription update failed: %s"
+msgstr "Ошибка обновления подписки: %s"
+
+msgid "Subscription saved and config updated"
+msgstr "Подписка сохранена, конфиг обновлен"
+
+msgid "Config refreshed from subscription"
+msgstr "Конфиг обновлен из подписки"
+
+msgid "Failed to remove subscription schedule: %s"
+msgstr "Не удалось удалить расписание подписки: %s"
+
+msgid "Subscription removed"
+msgstr "Подписка удалена"
+
+msgid "Auto update mode: %s"
+msgstr "Режим автообновления: %s"
+
+msgid "Configuration saved, but Mihomo reload failed"
+msgstr "Конфиг сохранен, но reload Mihomo не выполнен"
+
+msgid "Configuration applied and reloaded"
+msgstr "Конфиг применен и перечитан"
+
+msgid "Off"
+msgstr "Без"
+
+msgid "1h"
+msgstr "1ч"
+
+msgid "2h"
+msgstr "2ч"
+
+msgid "1d"
+msgstr "1д"
+
+msgid "Auto-detected WAN: %s"
+msgstr "Авто-определение WAN: %s"
+
+msgid "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN - best for gaming)."
+msgstr "Выберите, как перенаправлять трафик в Clash: TPROXY (весь трафик), TUN (весь трафик через виртуальный интерфейс) или MIXED (TCP через TPROXY, UDP через TUN - оптимально для игр)."
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Format"
+msgstr "Формат"
+
+msgid "Configuration formatted"
+msgstr "Конфигурация отформатирована"
+
+msgid "Checking YAML..."
+msgstr "Проверка YAML..."
+
+msgid "YAML valid"
+msgstr "YAML валиден"
+
+msgid "YAML error: %s"
+msgstr "Ошибка YAML: %s"
+
+msgid "Editor fallback mode"
+msgstr "Режим резервного редактора"
+
+msgid "Deep format failed: %s"
+msgstr "Глубокое форматирование не выполнено: %s"
+
+msgid "No matching connections."
+msgstr "Нет соединений по фильтру."
+
+msgid "Close connection"
+msgstr "Закрыть соединение"
+
+msgid "Filter connections"
+msgstr "Фильтр соединений"
+
+msgid "Close all"
+msgstr "Закрыть все"
+
+msgid "Failed to switch selector: %s"
+msgstr "Не удалось переключить селектор: %s"
+
+msgid "Selector switched: %s -> %s"
+msgstr "Селектор переключен: %s -> %s"
+
+msgid "Failed to close connections: %s"
+msgstr "Не удалось закрыть соединения: %s"
+
+msgid "All connections closed"
+msgstr "Все соединения закрыты"
+
+msgid "Failed to close connection: %s"
+msgstr "Не удалось закрыть соединение: %s"
+
+msgid "Config"
+msgstr "Конфиг"
+
+msgid "Proxies"
+msgstr "Прокси"
+
+msgid "IP Exclude"
+msgstr "Искл. IP"
+
+msgid "Port Exclude"
+msgstr "Искл. порты"
+
+msgid "Port Proxying"
+msgstr "Проксирование портов"

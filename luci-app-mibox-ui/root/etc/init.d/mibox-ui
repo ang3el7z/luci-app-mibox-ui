@@ -1,0 +1,95 @@
+#!/bin/sh /etc/rc.common
+
+START=95
+STOP=10
+USE_PROCD=1
+
+CFG_NAME="mibox-ui"
+CFG_SECTION="main"
+DEFAULT_CONFIG="/opt/clash/config.yaml"
+DEFAULT_SETTINGS="/opt/clash/settings"
+APPLY_SCRIPT="/usr/bin/mibox-ui/mibox-ui-apply-settings"
+SUBSCRIPTION_SCRIPT="/usr/bin/mibox-ui/mibox-ui-subscription"
+
+log_msg() {
+	logger -t mibox-ui "$*"
+}
+
+uci_get() {
+	uci -q get "${CFG_NAME}.${CFG_SECTION}.${1}"
+}
+
+detect_binary() {
+	for bin in /usr/bin/mihomo /usr/bin/clash /opt/clash/bin/clash; do
+		[ -x "$bin" ] && {
+			echo "$bin"
+			return 0
+		}
+	done
+	return 1
+}
+
+resolve_config() {
+	local cfg
+	cfg="$(uci_get config_path)"
+	[ -n "$cfg" ] || cfg="$DEFAULT_CONFIG"
+	echo "$cfg"
+}
+
+resolve_settings() {
+	local settings
+	settings="$(uci_get settings_path)"
+	[ -n "$settings" ] || settings="$DEFAULT_SETTINGS"
+	echo "$settings"
+}
+
+resolve_service_name() {
+	local svc
+	svc="$(uci_get service_name)"
+	[ -n "$svc" ] || svc="clash"
+	echo "$svc"
+}
+
+start_service() {
+	local bin cfg
+	bin="$(detect_binary)" || {
+		log_msg "No mihomo/clash binary found"
+		return 1
+	}
+
+	cfg="$(resolve_config)"
+	[ -f "$cfg" ] || {
+		log_msg "Config not found: $cfg"
+		return 1
+	}
+
+	if [ -x "$APPLY_SCRIPT" ]; then
+		"$APPLY_SCRIPT" "$(resolve_settings)" >/dev/null 2>&1 || true
+	fi
+	if [ -x "$SUBSCRIPTION_SCRIPT" ]; then
+		"$SUBSCRIPTION_SCRIPT" sync "$(resolve_settings)" "$cfg" "$(resolve_service_name)" --quiet >/dev/null 2>&1 || true
+	fi
+
+	procd_open_instance
+	procd_set_param command "$bin" -f "$cfg"
+	procd_set_param respawn 3600 5 5
+	procd_set_param stdout 1
+	procd_set_param stderr 1
+	procd_set_param file "$cfg"
+	procd_close_instance
+
+	log_msg "Started $bin with $cfg"
+}
+
+stop_service() {
+	:
+}
+
+reload_service() {
+	stop
+	start
+}
+
+service_triggers() {
+	procd_add_reload_trigger "$CFG_NAME"
+}

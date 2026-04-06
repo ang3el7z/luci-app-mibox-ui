@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -x /opt/clash/bin/clash-rules ] || exit 0
+
+case "$ACTION" in
+	add)
+		[ "$INTERFACE" = "clash-tun" ] || exit 0
+		CLASH_RULES_QUIET=1 /opt/clash/bin/clash-rules tun_route_setup >/dev/null 2>&1 || true
+		CLASH_RULES_QUIET=1 /opt/clash/bin/clash-rules repair_policy >/dev/null 2>&1 || true
+		;;
+esac
