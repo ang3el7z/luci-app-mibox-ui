@@ -11,6 +11,7 @@ const UCI_SECTION = 'main';
 const DEFAULT_CONFIG_PATH = '/opt/clash/config.yaml';
 const DEFAULT_LOG_PATH = '/tmp/mibox.log';
 const DEFAULT_SETTINGS_PATH = '/opt/clash/settings';
+const APP_VERSION = '0.1.0';
 const HELPER_BIN = '/usr/bin/mibox-ui/mibox-ui-helper';
 const SUBSCRIPTION_BIN = '/usr/bin/mibox-ui/mibox-ui-subscription';
 const ACE_BASE = '/luci-static/resources/view/mibox-ui/ace/';
@@ -2089,7 +2090,7 @@ return view.extend({
 					'<div class="mbox-head-right">' +
 						'<span class="mbox-pill">Mihomo</span>' +
 						'<span class="mbox-pill" data-role="kernel-pill">-</span>' +
-						'<span class="mbox-pill">0.7.5</span>' +
+						'<span class="mbox-pill">' + escHtml(APP_VERSION) + '</span>' +
 						'<button type="button" data-role="refresh-all" class="mbox-btn mbox-icon-btn" title="' + _('Refresh') + '">&#x21bb;</button>' +
 					'</div>' +
 				'</div>' +
