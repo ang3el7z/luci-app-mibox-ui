@@ -1,0 +1,16 @@
+﻿# Local reference sources (not for commit)
+temp/
+
+# Build artifacts
+bin/
+build/
+dist/
+*.ipk
+*.apk
+*.lmo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+[ "$ACTION" = "ifup" ] || exit 0
+
+HELPER="/usr/bin/mibox-ui/mibox-ui-helper"
+APPLY="/usr/bin/mibox-ui/mibox-ui-apply-settings"
+
+[ -x "$HELPER" ] || exit 0
+
+# Require an active default route before triggering provider refresh.
+ip route show default | grep -q 'default via' || exit 0
+
+# Ensure one of supported services is running.
+if /etc/init.d/clash status 2>/dev/null | grep -q "running"; then
+	:
+elif /etc/init.d/mibox-ui status 2>/dev/null | grep -q "running"; then
+	:
+else
+	exit 0
+fi
+
+logger -t mibox-hotplug "ifup detected (iface=$INTERFACE dev=$DEVICE), refreshing providers"
+
+sleep 10
+
+"$HELPER" refresh-providers >/dev/null 2>&1 || true
+[ -x "$APPLY" ] && "$APPLY" >/dev/null 2>&1 || true

@@ -1,0 +1,477 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"PO-Revision-Date: 2026-04-07 00:00+0000\n"
+"Last-Translator: Ang3el\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Running"
+msgstr "Running"
+
+msgid "Stopped"
+msgstr "Stopped"
+
+msgid "No selector data. Start Mihomo and open external-controller API."
+msgstr "No selector data. Start Mihomo and open external-controller API."
+
+msgid "No active connections."
+msgstr "No active connections."
+
+msgid "Chain"
+msgstr "Chain"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Traffic"
+msgstr "Traffic"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "No logs yet."
+msgstr "No logs yet."
+
+msgid "Working..."
+msgstr "Working..."
+
+msgid "Restart"
+msgstr "Restart"
+
+msgid "Routing mode"
+msgstr "Routing mode"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "Selectors"
+msgstr "Selectors"
+
+msgid "Connections"
+msgstr "Connections"
+
+msgid "Config path:"
+msgstr "Config path:"
+
+msgid "Validate"
+msgstr "Validate"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save & Apply"
+msgstr "Save & Apply"
+
+msgid "Proxy selector groups from Mihomo API"
+msgstr "Proxy selector groups from Mihomo API"
+
+msgid "Refresh selectors"
+msgstr "Refresh selectors"
+
+msgid "Live connections"
+msgstr "Live connections"
+
+msgid "Refresh connections"
+msgstr "Refresh connections"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Filter logs"
+msgstr "Filter logs"
+
+msgid "Refresh logs"
+msgstr "Refresh logs"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Service started"
+msgstr "Service started"
+
+msgid "Service stopped"
+msgstr "Service stopped"
+
+msgid "Service restarted"
+msgstr "Service restarted"
+
+msgid "Routing mode changed: %s"
+msgstr "Routing mode changed: %s"
+
+msgid "Configuration saved"
+msgstr "Configuration saved"
+
+msgid "Configuration is valid"
+msgstr "Configuration is valid"
+
+msgid "Validation failed"
+msgstr "Validation failed"
+
+msgid "Validation error: %s"
+msgstr "Validation error: %s"
+
+msgid "Configuration applied and service restarted"
+msgstr "Configuration applied and service restarted"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Interface Processing Mode"
+msgstr "Interface Processing Mode"
+
+msgid "Choose how to handle network interfaces for proxy processing."
+msgstr "Choose how to handle network interfaces for proxy processing."
+
+msgid "Exclude Mode (Universal approach)"
+msgstr "Exclude Mode (Universal approach)"
+
+msgid "Process traffic from ALL interfaces except selected ones. Automatically detects and excludes WAN. Recommended for most users."
+msgstr "Process traffic from ALL interfaces except selected ones. Automatically detects and excludes WAN. Recommended for most users."
+
+msgid "Explicit Mode (Precise control)"
+msgstr "Explicit Mode (Precise control)"
+
+msgid "Process traffic ONLY from selected interfaces. More secure but requires manual configuration. Recommended for advanced users."
+msgstr "Process traffic ONLY from selected interfaces. More secure but requires manual configuration. Recommended for advanced users."
+
+msgid "Proxy Mode"
+msgstr "Proxy Mode"
+
+msgid "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN — best for gaming)."
+msgstr "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN — best for gaming)."
+
+msgid "TUN stack"
+msgstr "TUN stack"
+
+msgid "Automatic Interface Detection"
+msgstr "Automatic Interface Detection"
+
+msgid "Automatically detect WAN interface"
+msgstr "Automatically detect WAN interface"
+
+msgid "When enabled, automatically detects and excludes WAN interface. Disable for manual interface exclusions."
+msgstr "When enabled, automatically detects and excludes WAN interface. Disable for manual interface exclusions."
+
+msgid "Select interfaces to process"
+msgstr "Select interfaces to process"
+
+msgid "Select interfaces to exclude"
+msgstr "Select interfaces to exclude"
+
+msgid "Traffic from these interfaces will be processed by the proxy."
+msgstr "Traffic from these interfaces will be processed by the proxy."
+
+msgid "Traffic from these interfaces will bypass the proxy (direct routing)."
+msgstr "Traffic from these interfaces will bypass the proxy (direct routing)."
+
+msgid "Additional Settings"
+msgstr "Additional Settings"
+
+msgid "Block QUIC traffic (UDP port 443)"
+msgstr "Block QUIC traffic (UDP port 443)"
+
+msgid "When enabled, blocks QUIC traffic on UDP port 443. This can improve proxy effectiveness for services like YouTube."
+msgstr "When enabled, blocks QUIC traffic on UDP port 443. This can improve proxy effectiveness for services like YouTube."
+
+msgid "Store rules and proxy providers in RAM (tmpfs)"
+msgstr "Store rules and proxy providers in RAM (tmpfs)"
+
+msgid "When enabled, rulesets and proxy-providers are stored in tmpfs for faster access (uses RAM)."
+msgstr "When enabled, rulesets and proxy-providers are stored in tmpfs for faster access (uses RAM)."
+
+msgid "Add HWID headers to subscriptions"
+msgstr "Add HWID headers to subscriptions"
+
+msgid "Automatically adds HWID headers to proxy-providers for device tracking (Remnawave compatibility)."
+msgstr "Automatically adds HWID headers to proxy-providers for device tracking (Remnawave compatibility)."
+
+msgid "Save settings"
+msgstr "Save settings"
+
+msgid "Clear selection"
+msgstr "Clear selection"
+
+msgid "Restart service"
+msgstr "Restart service"
+
+msgid "Restart Clash service after saving changes"
+msgstr "Restart Clash service after saving changes"
+
+msgid "Mihomo Kernel Management"
+msgstr "Mihomo Kernel Management"
+
+msgid "Download and manage the Mihomo (Clash Meta) kernel binary."
+msgstr "Download and manage the Mihomo (Clash Meta) kernel binary."
+
+msgid "Reinstall kernel"
+msgstr "Reinstall kernel"
+
+msgid "Refresh status"
+msgstr "Refresh status"
+
+msgid "Kernel status: Installed"
+msgstr "Kernel status: Installed"
+
+msgid "Kernel status: Not installed"
+msgstr "Kernel status: Not installed"
+
+msgid "Version: %s"
+msgstr "Version: %s"
+
+msgid "System architecture: %s"
+msgstr "System architecture: %s"
+
+msgid "Latest available: %s"
+msgstr "Latest available: %s"
+
+msgid "Failed to check latest version"
+msgstr "Failed to check latest version"
+
+msgid "No binary found for architecture: %s"
+msgstr "No binary found for architecture: %s"
+
+msgid "Mihomo kernel downloaded and installed successfully!"
+msgstr "Mihomo kernel downloaded and installed successfully!"
+
+msgid "Failed to download mihomo kernel: %s"
+msgstr "Failed to download mihomo kernel: %s"
+
+msgid "Settings saved. Please restart the Clash service for changes to take effect."
+msgstr "Settings saved. Please restart the Clash service for changes to take effect."
+
+msgid "TUN: TUN interface mode. Creates virtual network interface for all traffic. Better performance and works without TPROXY."
+msgstr "TUN: TUN interface mode. Creates virtual network interface for all traffic. Better performance and works without TPROXY."
+
+msgid "MIXED: Hybrid mode. TCP via TPROXY and UDP via TUN. Usually optimal for gaming and low-latency UDP."
+msgstr "MIXED: Hybrid mode. TCP via TPROXY and UDP via TUN. Usually optimal for gaming and low-latency UDP."
+
+msgid "TPROXY: Transparent proxy mode. Routes TCP and UDP through TPROXY port 7894."
+msgstr "TPROXY: Transparent proxy mode. Routes TCP and UDP through TPROXY port 7894."
+
+msgid "Mode: Explicit (process only selected)"
+msgstr "Mode: Explicit (process only selected)"
+
+msgid "Manual selection: %s"
+msgstr "Manual selection: %s"
+
+msgid "No interfaces configured"
+msgstr "No interfaces configured"
+
+msgid "Explicit mode enabled (manual control)"
+msgstr "Explicit mode enabled (manual control)"
+
+msgid "Mode: Exclude (process all except selected)"
+msgstr "Mode: Exclude (process all except selected)"
+
+msgid "Auto-detected WAN: %s ✓"
+msgstr "Auto-detected WAN: %s ✓"
+
+msgid "Manual exclusions: %s"
+msgstr "Manual exclusions: %s"
+
+msgid "No exclusions configured"
+msgstr "No exclusions configured"
+
+msgid "Available WAN interface: %s"
+msgstr "Available WAN interface: %s"
+
+msgid "No WAN interface detected"
+msgstr "No WAN interface detected"
+
+msgid "Download failed"
+msgstr "Download failed"
+
+msgid "Extraction failed"
+msgstr "Extraction failed"
+
+msgid "Install failed"
+msgstr "Install failed"
+
+msgid "WAN Interfaces"
+msgstr "WAN Interfaces"
+
+msgid "Ethernet Interfaces"
+msgstr "Ethernet Interfaces"
+
+msgid "Wi-Fi interfaces"
+msgstr "Wi-Fi interfaces"
+
+msgid "USB Interfaces"
+msgstr "USB Interfaces"
+
+msgid "VPN Interfaces"
+msgstr "VPN Interfaces"
+
+msgid "Virtual Interfaces"
+msgstr "Virtual Interfaces"
+
+msgid "Other Interfaces"
+msgstr "Other Interfaces"
+
+msgid "Rule sets"
+msgstr "Rule sets"
+
+msgid "Proxy sets"
+msgstr "Proxy sets"
+
+msgid "Providers refreshed (updated: %s, failed: %s)"
+msgstr "Providers refreshed (updated: %s, failed: %s)"
+
+msgid "Providers refresh failed: %s"
+msgstr "Providers refresh failed: %s"
+
+msgid "Failed to apply runtime settings: %s"
+msgstr "Failed to apply runtime settings: %s"
+
+msgid "Runtime settings applied"
+msgstr "Runtime settings applied"
+
+msgid "Subscription URL"
+msgstr "Subscription URL"
+
+msgid "Update from subscription"
+msgstr "Update from subscription"
+
+msgid "Remove subscription"
+msgstr "Remove subscription"
+
+msgid "Subscription action failed"
+msgstr "Subscription action failed"
+
+msgid "Auto: %s"
+msgstr "Auto: %s"
+
+msgid "Subscription configured. Last mode: %s"
+msgstr "Subscription configured. Last mode: %s"
+
+msgid "Subscription is not configured."
+msgstr "Subscription is not configured."
+
+msgid "Please enter a valid http(s) subscription URL."
+msgstr "Please enter a valid http(s) subscription URL."
+
+msgid "Failed to update subscription schedule: %s"
+msgstr "Failed to update subscription schedule: %s"
+
+msgid "Subscription update failed: %s"
+msgstr "Subscription update failed: %s"
+
+msgid "Subscription saved and config updated"
+msgstr "Subscription saved and config updated"
+
+msgid "Config refreshed from subscription"
+msgstr "Config refreshed from subscription"
+
+msgid "Failed to remove subscription schedule: %s"
+msgstr "Failed to remove subscription schedule: %s"
+
+msgid "Subscription removed"
+msgstr "Subscription removed"
+
+msgid "Auto update mode: %s"
+msgstr "Auto update mode: %s"
+
+msgid "Configuration saved, but Mihomo reload failed"
+msgstr "Configuration saved, but Mihomo reload failed"
+
+msgid "Configuration applied and reloaded"
+msgstr "Configuration applied and reloaded"
+
+msgid "Off"
+msgstr "Off"
+
+msgid "1h"
+msgstr "1h"
+
+msgid "2h"
+msgstr "2h"
+
+msgid "1d"
+msgstr "1d"
+
+msgid "Auto-detected WAN: %s"
+msgstr "Auto-detected WAN: %s"
+
+msgid "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN - best for gaming)."
+msgstr "Choose how traffic is redirected to Clash: TPROXY (all traffic), TUN (all traffic via virtual interface), or MIXED (TCP via TPROXY, UDP via TUN - best for gaming)."
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Format"
+msgstr "Format"
+
+msgid "Configuration formatted"
+msgstr "Configuration formatted"
+
+msgid "Checking YAML..."
+msgstr "Checking YAML..."
+
+msgid "YAML valid"
+msgstr "YAML valid"
+
+msgid "YAML error: %s"
+msgstr "YAML error: %s"
+
+msgid "Editor fallback mode"
+msgstr "Editor fallback mode"
+
+msgid "Deep format failed: %s"
+msgstr "Deep format failed: %s"
+
+msgid "No matching connections."
+msgstr "No matching connections."
+
+msgid "Close connection"
+msgstr "Close connection"
+
+msgid "Filter connections"
+msgstr "Filter connections"
+
+msgid "Close all"
+msgstr "Close all"
+
+msgid "Failed to switch selector: %s"
+msgstr "Failed to switch selector: %s"
+
+msgid "Selector switched: %s -> %s"
+msgstr "Selector switched: %s -> %s"
+
+msgid "Failed to close connections: %s"
+msgstr "Failed to close connections: %s"
+
+msgid "All connections closed"
+msgstr "All connections closed"
+
+msgid "Failed to close connection: %s"
+msgstr "Failed to close connection: %s"
+
+msgid "Config"
+msgstr "Config"
+
+msgid "Proxies"
+msgstr "Proxies"
+
+msgid "IP Exclude"
+msgstr "IP Exclude"
+
+msgid "Port Exclude"
+msgstr "Port Exclude"
+
+msgid "Port Proxying"
+msgstr "Port Proxying"

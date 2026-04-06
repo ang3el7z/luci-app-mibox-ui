@@ -1,0 +1,66 @@
+{
+	"luci-app-mibox-ui": {
+		"description": "Grant access to Mibox UI and Mihomo controls",
+		"read": {
+			"file": {
+				"/etc/init.d/mibox-ui": [ "exec", "read" ],
+				"/etc/init.d/clash": [ "exec", "read" ],
+				"/etc/mibox/*": [ "read" ],
+				"/opt/clash/config.yaml": [ "read", "write" ],
+				"/opt/clash/settings": [ "read", "write" ],
+				"/proc/net/route": [ "read" ],
+				"/sys/class/net": [ "list" ],
+				"/sys/class/net/*": [ "list", "read" ],
+				"/etc/openwrt_release": [ "read" ],
+				"/tmp/mibox*": [ "read" ],
+				"/usr/bin/mibox-ui/mibox-ui-helper": [ "exec", "read" ],
+				"/usr/bin/mibox-ui/mibox-ui-apply-settings": [ "exec", "read" ],
+				"/usr/bin/mibox-ui/mibox-ui-subscription": [ "exec", "read" ],
+				"/usr/bin/mihomo": [ "exec", "read" ],
+				"/usr/bin/clash": [ "exec", "read" ],
+				"/opt/clash/bin/clash": [ "exec", "read" ],
+				"/opt/clash/bin/clash-rules": [ "exec", "read" ],
+				"/sbin/logread": [ "exec", "read" ],
+				"/sbin/uci": [ "exec" ],
+				"/bin/ls": [ "exec" ],
+				"/sbin/ip": [ "exec" ],
+				"/usr/sbin/ip": [ "exec" ],
+				"/usr/sbin/brctl": [ "exec" ],
+				"/bin/sh": [ "exec" ],
+				"/bin/gzip": [ "exec" ],
+				"/bin/mv": [ "exec" ],
+				"/bin/chmod": [ "exec" ],
+				"/bin/mkdir": [ "exec" ],
+				"/usr/sbin/nft": [ "exec" ],
+				"/usr/bin/nft": [ "exec" ],
+				"/usr/bin/curl": [ "exec" ],
+				"/usr/bin/jq": [ "exec" ]
+			},
+			"ubus": {
+				"service": [ "list" ],
+				"file": [ "read", "stat", "exec" ]
+			},
+			"uci": [ "mibox-ui" ]
+		},
+		"write": {
+			"file": {
+				"/etc/mibox/*": [ "write", "read" ],
+				"/opt/clash/config.yaml": [ "write", "read" ],
+				"/opt/clash/settings": [ "write", "read" ],
+				"/tmp/mibox*": [ "write", "remove" ],
+				"/etc/init.d/mibox-ui": [ "exec" ],
+				"/etc/init.d/clash": [ "exec" ],
+				"/usr/bin/mibox-ui/mibox-ui-apply-settings": [ "exec" ],
+				"/usr/bin/mibox-ui/mibox-ui-subscription": [ "exec" ],
+				"/opt/clash/bin/clash-rules": [ "exec" ],
+				"/usr/sbin/nft": [ "exec" ],
+				"/usr/bin/nft": [ "exec" ],
+				"/sbin/uci": [ "exec" ]
+			},
+			"ubus": {
+				"file": [ "write", "exec" ]
+			},
+			"uci": [ "mibox-ui" ]
+		}
+	}
+}

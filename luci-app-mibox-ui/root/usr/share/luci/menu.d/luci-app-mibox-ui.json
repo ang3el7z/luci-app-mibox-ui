@@ -1,0 +1,21 @@
+{
+	"admin/services/mibox-ui": {
+		"title": "Mibox UI",
+		"action": {
+			"type": "alias",
+			"path": "admin/services/mibox-ui/dashboard"
+		},
+		"depends": {
+			"acl": [ "luci-app-mibox-ui" ]
+		},
+		"i18n": "mibox-ui"
+	},
+	"admin/services/mibox-ui/dashboard": {
+		"title": "Dashboard",
+		"order": 10,
+		"action": {
+			"type": "view",
+			"path": "mibox-ui/dashboard"
+		}
+	}
+}
