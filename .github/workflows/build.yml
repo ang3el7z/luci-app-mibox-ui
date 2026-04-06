@@ -1,208 +1,177 @@
-name: build
+name: Build And Release From Tag
+run-name: Release ${{ github.ref_name }}
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      release-tag:
-        description: "Release tag (example: v0.1.0). Leave empty to skip release."
-        required: false
-        default: ""
-        type: string
+
+permissions:
+  contents: write
 
 jobs:
+  sync-version:
+    name: Sync Version To Branch
+    runs-on: ubuntu-latest
+
+    outputs:
+      target_branch: ${{ steps.set-branch.outputs.target_branch }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set target branch
+        id: set-branch
+        run: |
+          BRANCH="${{ github.event.repository.default_branch }}"
+          echo "target_branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "Using branch: $BRANCH"
+
+      - name: Sync version from tag
+        run: |
+          set -e
+          VERSION="${GITHUB_REF_NAME#v}"
+
+          sed -i "s/^PKG_VERSION:=.*$/PKG_VERSION:=${VERSION}/" luci-app-xkeen-ui/Makefile
+
+          # если есть фронт
+          if [ -f luci-app-xkeen-ui/htdocs/luci-static/resources/view/xkeen-ui/dashboard.js ]; then
+            sed -i "s/^const APP_VERSION = '.*';/const APP_VERSION = '${VERSION}';/" \
+              luci-app-xkeen-ui/htdocs/luci-static/resources/view/xkeen-ui/dashboard.js
+          fi
+
+      - name: Commit and push
+        run: |
+          set -e
+
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          git commit -m "sync version with tag ${{ github.ref_name }}"
+          git push origin HEAD:${{ steps.set-branch.outputs.target_branch }}
+
   build:
-    name: Build package (OpenWrt ${{ matrix.version }} / ${{ matrix.pkg_format }})
-    runs-on: ubuntu-22.04
+    name: Build (${{ matrix.pkg_format }})
+    runs-on: ubuntu-latest
+    needs: sync-version
+
     strategy:
       fail-fast: false
       matrix:
         include:
-          - version: "24.10.2"
-            pkg_format: "ipk"
-            arch: "x86/64"
-          - version: "25.12.0-rc2"
-            pkg_format: "apk"
-            arch: "x86/64"
-
-    env:
-      PACKAGE_NAME: luci-app-mibox-ui
-      SDK_NAME: -sdk-
-      SDK_URL_PATH: https://downloads.openwrt.org/releases/${{ matrix.version }}/targets/${{ matrix.arch }}
-      MAKEFILE_PATH: luci-app-mibox-ui/Makefile
-      DASHBOARD_PATH: luci-app-mibox-ui/htdocs/luci-static/resources/view/mibox-ui/dashboard.js
+          - pkg_format: ipk
+            release_family: "24.10"
+          - pkg_format: apk
+            release_family: "25.12"
 
     steps:
-      - name: Checkout
+      - name: Checkout synced branch
         uses: actions/checkout@v4
+        with:
+          ref: refs/heads/${{ needs.sync-version.outputs.target_branch }}
 
-      - name: Resolve application version
-        id: app_version
-        shell: bash
-        run: |
-          set -e
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.release-tag }}" ]; then
-            RAW_VERSION="${{ github.event.inputs.release-tag }}"
-          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            RAW_VERSION="${GITHUB_REF#refs/tags/}"
-          else
-            RAW_VERSION="$(sed -n 's/^PKG_VERSION:=//p' "$MAKEFILE_PATH" | head -n1 | tr -d '[:space:]')"
-          fi
-
-          APP_VERSION="${RAW_VERSION#v}"
-          if [ -z "$APP_VERSION" ]; then
-            echo "Failed to resolve app version"
-            exit 1
-          fi
-
-          echo "app_version=$APP_VERSION" >> "$GITHUB_OUTPUT"
-          echo "Resolved app version: $APP_VERSION"
-
-      - name: Sync app version in sources
-        shell: bash
-        run: |
-          set -e
-          APP_VERSION="${{ steps.app_version.outputs.app_version }}"
-
-          sed -i -E "s/^PKG_VERSION:=.*/PKG_VERSION:=${APP_VERSION}/" "$MAKEFILE_PATH"
-          sed -i -E "s/^const APP_VERSION = '.*';/const APP_VERSION = '${APP_VERSION}';/" "$DASHBOARD_PATH"
-
-          echo "Synced version in:"
-          grep -n "^PKG_VERSION:=" "$MAKEFILE_PATH"
-          grep -n "^const APP_VERSION = " "$DASHBOARD_PATH"
-
-      - name: Install build dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -yq \
-            build-essential \
-            ca-certificates \
-            gawk \
-            gettext \
-            libncurses5-dev \
-            rsync \
-            unzip \
-            wget \
-            xsltproc \
-            zstd
+          sudo apt-get install -y zstd curl build-essential
 
-      - name: Create temporary directories
-        run: |
-          echo "SDK_DL_DIR=$(mktemp -d)" >> "$GITHUB_ENV"
-          echo "SDK_HOME=$(mktemp -d)" >> "$GITHUB_ENV"
-
-      - name: Download and verify OpenWrt SDK
+      - name: Resolve SDK
+        id: sdk
         run: |
           set -e
-          cd "$SDK_DL_DIR"
-          wget -q -O sha256sums "$SDK_URL_PATH/sha256sums"
-          if ! grep -- "$SDK_NAME" sha256sums > sha256sums.small 2>/dev/null; then
-            echo "Cannot find SDK archive entry in sha256sums for: $SDK_URL_PATH"
-            exit 1
-          fi
-          SDK_FILE="$(cut -d' ' -f2 < sha256sums.small | sed 's/*//g')"
-          wget -q -O "$SDK_FILE" "$SDK_URL_PATH/$SDK_FILE"
-          sha256sum -c ./sha256sums.small
-          tar --zstd -xf "$SDK_FILE" -C "$SDK_HOME" --strip=1
+
+          FAMILY="${{ matrix.release_family }}"
+          TARGET="x86"
+          SUBTARGET="64"
+
+          BASE="https://downloads.openwrt.org/releases"
+
+          VERSION=$(curl -fsSL "$BASE/" \
+            | grep -oE "${FAMILY}\.[0-9]+/" \
+            | tr -d '/' \
+            | sort -V \
+            | tail -n1)
+
+          SDK_URL=$(curl -fsSL "$BASE/$VERSION/targets/$TARGET/$SUBTARGET/" \
+            | grep -oE 'openwrt-sdk-[^"]+\.tar\.(zst|xz|gz)' \
+            | head -n1)
+
+          FULL_URL="$BASE/$VERSION/targets/$TARGET/$SUBTARGET/$SDK_URL"
+
+          echo "sdk_url=$FULL_URL" >> $GITHUB_OUTPUT
+
+      - name: Download SDK
+        run: |
+          set -e
+
+          mkdir sdk
+          curl -L "${{ steps.sdk.outputs.sdk_url }}" -o sdk.tar
+
+          case sdk.tar in
+            *.zst) tar --zstd -xf sdk.tar -C sdk ;;
+            *.xz)  tar -xJf sdk.tar -C sdk ;;
+            *.gz)  tar -xzf sdk.tar -C sdk ;;
+          esac
+
+          SDK_DIR=$(find sdk -mindepth 1 -maxdepth 1 -type d | head -n1)
+          echo "SDK_DIR=$SDK_DIR" >> $GITHUB_ENV
 
       - name: Build package
         run: |
           set -e
-          cd "$SDK_HOME"
+
+          cd "$SDK_DIR"
+
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          ln -s "${{ github.workspace }}/luci-app-mibox-ui" "package/$PACKAGE_NAME"
+
+          ln -s "$GITHUB_WORKSPACE/luci-app-xkeen-ui" package/
+
           make defconfig
-          make "package/$PACKAGE_NAME/compile" -j"$(nproc)" V=s
+          make package/luci-app-xkeen-ui/compile -j$(nproc) V=s
 
-          OUT_DIR="${{ github.workspace }}/dist/${{ matrix.version }}-${{ matrix.pkg_format }}"
-          mkdir -p "$OUT_DIR"
-          find "$SDK_HOME/bin" -type f \
-            \( -name "${PACKAGE_NAME}_*.${{ matrix.pkg_format }}" -o -name "${PACKAGE_NAME}-*.${{ matrix.pkg_format }}" \) \
-            -exec cp -v {} "$OUT_DIR/" \;
-
-          if ! compgen -G "$OUT_DIR/*.${{ matrix.pkg_format }}" > /dev/null; then
-            echo "No built package found for ${PACKAGE_NAME} (${{ matrix.pkg_format }})"
-            exit 1
-          fi
-          ls -lah "$OUT_DIR"
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package-${{ matrix.version }}-${{ matrix.pkg_format }}
-          path: dist/${{ matrix.version }}-${{ matrix.pkg_format }}/*.${{ matrix.pkg_format }}
-          if-no-files-found: error
-          retention-days: 7
-
-  release:
-    name: Create GitHub release
-    needs: build
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.release-tag != '')
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-
-      - name: Prepare release files
-        id: prep
+      - name: Collect artifact
         run: |
           set -e
-          mkdir -p release_files
-          find artifacts -type f \( -name "*.ipk" -o -name "*.apk" \) -exec cp -v {} release_files/ \;
 
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            RELEASE_TAG="${{ github.event.inputs.release-tag }}"
-          else
-            RELEASE_TAG="${GITHUB_REF#refs/tags/}"
-          fi
+          VERSION="${GITHUB_REF_NAME#v}"
+          OUT=out
+          mkdir -p $OUT
 
-          if [ -z "$RELEASE_TAG" ]; then
-            echo "Release tag is empty."
-            exit 1
-          fi
+          find "$SDK_DIR/bin" -name "luci-app-xkeen-ui*.${{ matrix.pkg_format }}" \
+            -exec cp {} "$OUT/luci-app-xkeen-ui-${VERSION}-all.${{ matrix.pkg_format }}" \;
 
-          case "$RELEASE_TAG" in
-            v*) ;;
-            *) RELEASE_TAG="v$RELEASE_TAG" ;;
-          esac
+          ls -la $OUT
 
-          echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg-${{ matrix.pkg_format }}
+          path: out/*.${{ matrix.pkg_format }}
 
-          {
-            echo "## $RELEASE_TAG"
-            echo ""
-            echo "Automated build for \`luci-app-mibox-ui\`."
-            echo ""
-            echo "### Included artifacts"
-            echo "- IPK package (OpenWrt 24.10.x)"
-            echo "- APK package (OpenWrt 25.12.x)"
-            echo ""
-            echo "Build date: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-          } > release_notes.md
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: build
 
-          ls -lah release_files
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
 
-      - name: Publish release
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.prep.outputs.release_tag }}
-          files: release_files/*
-          body_path: release_notes.md
-          draft: false
-          prerelease: false
+          files: dist/**/*
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
