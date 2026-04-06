@@ -5,6 +5,13 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      release-tag:
+        description: "Release tag (example: v0.1.0)"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -12,10 +19,10 @@ permissions:
 jobs:
   sync-version:
     name: Sync Version To Branch
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     outputs:
-      target_branch: ${{ steps.set-branch.outputs.target_branch }}
+      target_branch: ${{ steps.branch.outputs.target_branch }}
 
     steps:
       - name: Checkout
@@ -24,24 +31,38 @@ jobs:
           fetch-depth: 0
 
       - name: Set target branch
-        id: set-branch
+        id: branch
         run: |
           BRANCH="${{ github.event.repository.default_branch }}"
           echo "target_branch=$BRANCH" >> "$GITHUB_OUTPUT"
-          echo "Using branch: $BRANCH"
 
-      - name: Sync version from tag
+      - name: Resolve version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.release-tag }}" ]; then
+            RAW="${{ github.event.inputs.release-tag }}"
+          else
+            RAW="${GITHUB_REF#refs/tags/}"
+          fi
+
+          VERSION="${RAW#v}"
+
+          if [ -z "$VERSION" ]; then
+            echo "Version empty"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Sync version in files
         run: |
           set -e
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${{ steps.version.outputs.version }}"
 
-          sed -i "s/^PKG_VERSION:=.*$/PKG_VERSION:=${VERSION}/" luci-app-xkeen-ui/Makefile
+          sed -i -E "s/^PKG_VERSION:=.*/PKG_VERSION:=${VERSION}/" luci-app-mibox-ui/Makefile
 
-          # если есть фронт
-          if [ -f luci-app-xkeen-ui/htdocs/luci-static/resources/view/xkeen-ui/dashboard.js ]; then
-            sed -i "s/^const APP_VERSION = '.*';/const APP_VERSION = '${VERSION}';/" \
-              luci-app-xkeen-ui/htdocs/luci-static/resources/view/xkeen-ui/dashboard.js
-          fi
+          sed -i -E "s/^const APP_VERSION = '.*';/const APP_VERSION = '${VERSION}';/" \
+            luci-app-mibox-ui/htdocs/luci-static/resources/view/mibox-ui/dashboard.js
 
       - name: Commit and push
         run: |
@@ -57,21 +78,28 @@ jobs:
 
           git add .
           git commit -m "sync version with tag ${{ github.ref_name }}"
-          git push origin HEAD:${{ steps.set-branch.outputs.target_branch }}
+          git push origin HEAD:${{ steps.branch.outputs.target_branch }}
 
   build:
-    name: Build (${{ matrix.pkg_format }})
-    runs-on: ubuntu-latest
+    name: Build (OpenWrt ${{ matrix.version }} / ${{ matrix.pkg_format }})
+    runs-on: ubuntu-22.04
     needs: sync-version
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          - pkg_format: ipk
-            release_family: "24.10"
-          - pkg_format: apk
-            release_family: "25.12"
+          - version: "24.10.2"
+            pkg_format: "ipk"
+            arch: "x86/64"
+          - version: "25.12.0-rc2"
+            pkg_format: "apk"
+            arch: "x86/64"
+
+    env:
+      PACKAGE_NAME: luci-app-mibox-ui
+      SDK_NAME: -sdk-
+      SDK_URL_PATH: https://downloads.openwrt.org/releases/${{ matrix.version }}/targets/${{ matrix.arch }}
 
     steps:
       - name: Checkout synced branch
@@ -82,96 +110,103 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y zstd curl build-essential
+          sudo apt-get install -yq \
+            build-essential \
+            ca-certificates \
+            gawk \
+            gettext \
+            libncurses5-dev \
+            rsync \
+            unzip \
+            wget \
+            xsltproc \
+            zstd
 
-      - name: Resolve SDK
-        id: sdk
+      - name: Create temp dirs
         run: |
-          set -e
-
-          FAMILY="${{ matrix.release_family }}"
-          TARGET="x86"
-          SUBTARGET="64"
-
-          BASE="https://downloads.openwrt.org/releases"
-
-          VERSION=$(curl -fsSL "$BASE/" \
-            | grep -oE "${FAMILY}\.[0-9]+/" \
-            | tr -d '/' \
-            | sort -V \
-            | tail -n1)
-
-          SDK_URL=$(curl -fsSL "$BASE/$VERSION/targets/$TARGET/$SUBTARGET/" \
-            | grep -oE 'openwrt-sdk-[^"]+\.tar\.(zst|xz|gz)' \
-            | head -n1)
-
-          FULL_URL="$BASE/$VERSION/targets/$TARGET/$SUBTARGET/$SDK_URL"
-
-          echo "sdk_url=$FULL_URL" >> $GITHUB_OUTPUT
+          echo "SDK_DL_DIR=$(mktemp -d)" >> "$GITHUB_ENV"
+          echo "SDK_HOME=$(mktemp -d)" >> "$GITHUB_ENV"
 
       - name: Download SDK
         run: |
           set -e
+          cd "$SDK_DL_DIR"
 
-          mkdir sdk
-          curl -L "${{ steps.sdk.outputs.sdk_url }}" -o sdk.tar
+          wget -q -O sha256sums "$SDK_URL_PATH/sha256sums"
 
-          case sdk.tar in
-            *.zst) tar --zstd -xf sdk.tar -C sdk ;;
-            *.xz)  tar -xJf sdk.tar -C sdk ;;
-            *.gz)  tar -xzf sdk.tar -C sdk ;;
-          esac
+          grep -- "$SDK_NAME" sha256sums > sha256sums.small
 
-          SDK_DIR=$(find sdk -mindepth 1 -maxdepth 1 -type d | head -n1)
-          echo "SDK_DIR=$SDK_DIR" >> $GITHUB_ENV
+          SDK_FILE="$(cut -d' ' -f2 < sha256sums.small | sed 's/*//g')"
+
+          wget -q -O "$SDK_FILE" "$SDK_URL_PATH/$SDK_FILE"
+
+          sha256sum -c ./sha256sums.small
+
+          tar --zstd -xf "$SDK_FILE" -C "$SDK_HOME" --strip=1
 
       - name: Build package
         run: |
           set -e
 
-          cd "$SDK_DIR"
+          cd "$SDK_HOME"
 
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-          ln -s "$GITHUB_WORKSPACE/luci-app-xkeen-ui" package/
+          ln -s "${{ github.workspace }}/luci-app-mibox-ui" "package/$PACKAGE_NAME"
 
           make defconfig
-          make package/luci-app-xkeen-ui/compile -j$(nproc) V=s
+          make "package/$PACKAGE_NAME/compile" -j"$(nproc)" V=s
 
-      - name: Collect artifact
-        run: |
-          set -e
+          OUT_DIR="${{ github.workspace }}/dist/${{ matrix.version }}-${{ matrix.pkg_format }}"
+          mkdir -p "$OUT_DIR"
 
-          VERSION="${GITHUB_REF_NAME#v}"
-          OUT=out
-          mkdir -p $OUT
+          find "$SDK_HOME/bin" -type f \
+            \( -name "${PACKAGE_NAME}_*.${{ matrix.pkg_format }}" -o -name "${PACKAGE_NAME}-*.${{ matrix.pkg_format }}" \) \
+            -exec cp -v {} "$OUT_DIR/" \;
 
-          find "$SDK_DIR/bin" -name "luci-app-xkeen-ui*.${{ matrix.pkg_format }}" \
-            -exec cp {} "$OUT/luci-app-xkeen-ui-${VERSION}-all.${{ matrix.pkg_format }}" \;
-
-          ls -la $OUT
-
-      - name: Upload artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pkg-${{ matrix.pkg_format }}
-          path: out/*.${{ matrix.pkg_format }}
+          name: package-${{ matrix.version }}-${{ matrix.pkg_format }}
+          path: dist/${{ matrix.version }}-${{ matrix.pkg_format }}/*.${{ matrix.pkg_format }}
 
   release:
-    name: Create Release
-    runs-on: ubuntu-latest
+    name: Create GitHub Release
+    runs-on: ubuntu-22.04
     needs: build
 
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: dist
+          path: artifacts
 
-      - name: Create release
+      - name: Prepare release
+        id: prep
+        run: |
+          set -e
+
+          mkdir -p release_files
+
+          find artifacts -type f \( -name "*.ipk" -o -name "*.apk" \) \
+            -exec cp -v {} release_files/ \;
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.release-tag }}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+          fi
+
+          case "$TAG" in
+            v*) ;;
+            *) TAG="v$TAG" ;;
+          esac
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/**/*
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
+          tag_name: ${{ steps.prep.outputs.tag }}
+          files: release_files/*
